@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.0)
 project(cjinja)
 
-set(TEST_NAME cjinja_test)
 add_subdirectory(deps/ejson)
-include_directories(. deps/ejson/include)
 
 add_library(${PROJECT_NAME} cjinja.cpp)
-
-add_executable(${TEST_NAME} cjinja.cpp test/test.cpp)
-target_link_libraries(${TEST_NAME} ejson)
+target_include_directories(${PROJECT_NAME}
+        PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+)
+target_link_libraries(${PROJECT_NAME} ejson)
